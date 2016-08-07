@@ -1,4 +1,3 @@
-
 <ul>
   <li>Id: {{vacancy.data.id}} </li>
   <li>Title: {{vacancy.data.title}}</li>
@@ -6,5 +5,15 @@
   <li>Url: {{vacancy.data.url}}</li>
 </ul>
 
-
-
+<table>
+  <th>ID</th>
+  <th>Title</th>
+  <th>Desc</th>
+  <th>URL</th>
+<tr ng-repeat="vacancy in vacancy.vacancies | limitTo:3">
+  <td>{{vacancy.id}}</td>
+  <td>{{vacancy.title}}</td>
+  <td>{{vacancy.description}}</td>
+  <td>{{vacancy.url}}</td>
+</tr>
+</table>

@@ -1,13 +1,19 @@
-var app = angular.module('homeworkApp', []);
+var app = angular.module('homeworkApp', ['ngResource']);
 
-app.directive('allVacancies', function() {
+app.factory('Vacancy', function($resource) {
+  return $resource('/api/vacs/:id');
+});
+
+app.directive('allVacancies', function($resource, Vacancy) {
     return {
       templateUrl: 'static/js/all.html',
-      controller: function($http) {
+      controller: function() {
         var vacancy = this;
-        $http.get('api/1').then(
-        function(response) {
-          vacancy.data = response.data;
+        // var vac = Vacancy.get({id: 2}, function() {
+        //   vacancy.data = vac;
+        // });
+        var vacs = Vacancy.query(function() {
+          vacancy.vacancies = vacs;
         });
       },
       controllerAs: 'vacancy'

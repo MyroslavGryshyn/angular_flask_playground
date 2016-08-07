@@ -23,20 +23,14 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/api/all', methods=['GET', 'OPTIONS'])
+@app.route('/api/vacs', methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def all():
-    data_list = {i.id: i.serialize for i in Vacancy.query.all()[0:10]}
-    return json.dumps({'data': data_list})
+    data_list = [i.serialize for i in Vacancy.query.all()[0:10]]
+    return json.dumps(data_list)
 
 
-@app.route('/api/first', methods=['GET', 'OPTIONS'])
-@crossdomain(origin='*')
-def first():
-    return jsonify(Vacancy.query.first().serialize)
-
-
-@app.route('/api/<int:vacancy_id>', methods=['GET', 'OPTIONS'])
+@app.route('/api/vacs/<int:vacancy_id>', methods=['GET', 'OPTIONS'])
 @crossdomain(origin='*')
 def by_id(vacancy_id):
     return jsonify(Vacancy.query.get(vacancy_id).serialize)
