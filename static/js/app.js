@@ -8,12 +8,23 @@ app.directive('allVacancies', function($resource, Vacancy) {
     return {
       templateUrl: 'static/js/all.html',
       controller: function() {
-        var vacancy = this;
-        // var vac = Vacancy.get({id: 2}, function() {
-        //   vacancy.data = vac;
-        // });
+        var vacancies = this;
         var vacs = Vacancy.query(function() {
-          vacancy.vacancies = vacs;
+          vacancies.vacancies = vacs;
+          console.log(vacancies.vacancies);
+        });
+      },
+      controllerAs: 'vacancies'
+    };
+  });
+
+app.directive('oneVacancy', function($resource, Vacancy) {
+    return {
+      templateUrl: 'static/js/one.html',
+      controller: function() {
+        var vacancy = this;
+        var vac = Vacancy.get({id: 2}, function() {
+          vacancy.data = vac;
         });
       },
       controllerAs: 'vacancy'
